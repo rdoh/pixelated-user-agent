@@ -199,6 +199,7 @@ class InputMail(Mail):
 
         for header in ['To', 'Cc', 'Bcc']:
             if self.headers[header]:
+                print '%s = %s' % (header, self.headers[header])
                 mime_multipart[header] = ", ".join(self.headers[header])
 
         if self.headers['Subject']:

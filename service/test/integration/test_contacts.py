@@ -27,6 +27,7 @@ class ContactsTest(SoledadTestBase):
         yield self.add_mail_to_inbox(input_mail)
 
         contacts = yield self.get_contacts(query='recipient')
+        print contacts
 
         self.assertTrue('recipient@to.com' in contacts)
         self.assertTrue('recipient@cc.com' in contacts)
@@ -69,6 +70,7 @@ class ContactsTest(SoledadTestBase):
         yield self.add_mail_to_inbox(formatted_input_mail)
 
         contacts = yield self.get_contacts(query='Recipient')
+        print str(contacts)
 
         self.assertEquals(3, len(contacts))
         self.assertTrue('Recipient Principal <recipient@to.com>' in contacts)

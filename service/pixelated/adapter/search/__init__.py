@@ -125,6 +125,8 @@ class SearchEngine(object):
         tags.add(mail.mailbox_name.lower())
         bounced = mail.bounced if mail.bounced else ['']
 
+        print 'mdict: %s' % mdict
+
         index_data = {
             'sender': self._unicode_header_field(header.get('from', '')),
             'subject': self._unicode_header_field(header.get('subject', '')),

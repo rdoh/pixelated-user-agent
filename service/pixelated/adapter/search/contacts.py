@@ -53,9 +53,14 @@ def search_addresses(searcher, query):
     results = []
     for field in ['to', 'cc', 'bcc', 'sender']:
         query_parser = QueryParser(field, searcher.schema)
+        print 'query [%s]' % ("*%s*" % query)
         results.append(searcher.search(query_parser.parse("*%s*" % query),
                                        limit=None,
                                        mask=restrict_q,
                                        groupedby=sorting.FieldFacet(field,
                                                                     allow_overlap=True)).groups())
+
+    print 'search_addresses: [%s]' % results
+    print 'flattened search_addresses: [%s]' % flatten(results)
+
     return flatten(results)

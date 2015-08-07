@@ -141,6 +141,7 @@ class AppTestClient(object):
 
     @defer.inlineCallbacks
     def add_mail_to_inbox(self, input_mail):
+        print 'Raw email: %s %s' % (type(input_mail), input_mail.raw)
         mail = yield self.mail_store.add_mail('INBOX', input_mail.raw)
         defer.returnValue(mail)
         # inbox = yield self.mailboxes.inbox

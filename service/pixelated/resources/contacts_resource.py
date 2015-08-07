@@ -29,8 +29,17 @@ class ContactsResource(Resource):
         self._search_engine = search_engine
 
     def render_GET(self, request):
-        query = request.args.get('q', [''])[0]
+        query = request.args.get('q', [''])
+        print 'render_GET: query=[%s]' % query
         d = deferToThread(lambda: self._search_engine.contacts(query))
         d.addCallback(lambda tags: respond_json_deferred(tags, request))
+
+        def handle_error(error):
+            print 'Something went wrong'
+            import traceback
+            traceback.print_exc()
+            print error
+
+        d.addErrback(handle_error)
 
         return server.NOT_DONE_YET
